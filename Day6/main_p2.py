@@ -3,8 +3,8 @@ dataStream = inFile.readlines()[0]
 inFile.close()
 
 datagramList = []
-for i in range(4,len(dataStream)):
-    datagram = dataStream[i-4:i]
+for i in range(14,len(dataStream)):
+    datagram = dataStream[i-14:i]
     isDatagramValid = True
     for char in datagram:
         if datagram.count(char) > 1:

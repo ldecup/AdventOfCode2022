@@ -14,7 +14,5 @@ for line in inData:
     else:
         currElfCal = currElfCal + int(line.rstrip('/n'))
 
-
-
-print(sorted(elfList)[-3:])
-print(sum(sorted(elfList)[-3:]))
+print("Three biggest: " + str(sorted(elfList)[-3:]))
+print("Sum of three biggest: " + str(sum(sorted(elfList)[-3:])))

@@ -2,15 +2,15 @@ inFile = open('Day5/input.txt', 'r')
 inData = inFile.readlines()
 inFile.close()
 
-posArray = [['R','S','L','F','Q'],
-            ['N','Z','Q','G','P','T'],
-            ['S','M','Q','B'],
-            ['T','G','Z','J','H','C','B','Q'],
-            ['P','H','M','B','N','F','S'],
-            ['P','C','Q','N','S','L','V','G'],
-            ['W','C','F'],
-            ['Q','H','G','Z','W','V','P','M'],
-            ['G','Z','D','L','C','N','R']]
+posArray = [['H','C','R'],
+            ['B','J','H','L','S','F'],
+            ['R','M','D','H','J','T','Q'],
+            ['S','G','R','H','Z','B','J'],
+            ['R','P','F','Z','T','D','C','B'],
+            ['T','H','C','G'],
+            ['S','N','V','Z','B','P','W','L'],
+            ['R','J','Q','G','C'],
+            ['L','D','T','R','H','P','F','S']]
 #posArray = [['Z','N'],['M','C','D'],['P']]
 
 moveData = []
