@@ -26,16 +26,14 @@ def move(pos, dir):
 
 headPos = [0,0]
 tailPos = [0,0]
-listTailPos = [[0,0]]
+listHeadPos = [[headPos[0],headPos[1]]]
+listTailPos = [[tailPos[0],tailPos[1]]]
 for instructions in data:
     for i in range(int(instructions[1])):
-        prevHeadPos = headPos
-        headPos = move(headPos,instructions[0]) #this updates prevHeadPos for some reason ?
-        print('head moved to: ' + str(headPos))
-        tailPos = updateTail(headPos, tailPos, prevHeadPos)
-        print('tail moved to: ' + str(tailPos))
-        listTailPos.append(tailPos)
-        
+        headPos = move(headPos,instructions[0])
+        tailPos = updateTail(headPos, tailPos, listHeadPos[-1])
+        listHeadPos.append([headPos[0],headPos[1]])#why the hidden pointers Python, whyyyy :(
+        listTailPos.append([tailPos[0],tailPos[1]])        
 
 #Remove duplicates
 sortedList = []
