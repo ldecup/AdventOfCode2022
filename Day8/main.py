@@ -6,15 +6,56 @@ data = []
 for line in inData:
     data.append(line.rstrip('\n'))
 
-for line in data:
-    visibleTrees = []
-    highestTree = int(line[0])
-    visibleTrees.append([0,line[0]])
-    for tree in line:
-        if int(tree) > highestTree:
-            visibleTrees.append([line.index(tree),int(tree)])
-        else:
-            break
-    print(visibleTrees)
+#Find visible trees
+visibleTrees = []
+for y in range(1, len(data) - 1):
+    for x in range(1, len(data[0]) - 1):
+        #Check the trees on the left
+        isTreeVisible = True
+        for trees in data[y][:x]:
+            if trees >= data[y][x]:
+                isTreeVisible = False
+        if isTreeVisible:
+            visibleTrees.append([x,y])
+        #Check the trees on the right
+        isTreeVisible = True
+        for trees in data[y][x+1:]:
+            if trees >= data[y][x]:
+                isTreeVisible = False
+        if isTreeVisible:
+            visibleTrees.append([x,y])
+        #Check the trees above
+        isTreeVisible = True
+        for treesLines in data[:y]:
+            if treesLines[x] >= data[y][x]:
+                isTreeVisible = False
+        if isTreeVisible:
+            visibleTrees.append([x,y])
+        #Check the trees below
+        isTreeVisible = True
+        for treesLines in data[y+1:]:
+            if treesLines[x] >= data[y][x]:
+                isTreeVisible = False
+        if isTreeVisible:
+            visibleTrees.append([x,y])
 
-print("done")
+#Remove duplicates
+sortedTrees = []
+for trees in visibleTrees:
+    if trees not in sortedTrees:
+        sortedTrees.append(trees)
+
+#Print a visual map
+charLine = ''
+for y in range(len(data)):
+    for x in range(len(data[0])):
+        if [x,y] in sortedTrees:
+            charLine = charLine + 'X'
+        else:
+            charLine = charLine + '.'
+    print(charLine)
+    charLine = ''
+
+#Output
+nbVisibleTrees = len(sortedTrees) + 2*len(data) + 2*len(data[0]) - 4
+print('Number of visible trees: ' + str(nbVisibleTrees))
