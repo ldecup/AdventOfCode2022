@@ -21,6 +21,7 @@ class monkey:
         self.inspectedItems = inspectedItems
 
 monkeyList = []
+globalTest = 1
 currentMonkey = monkey(None,None,None,None,None,None,None)
 for line in data:
     if line[0].split(' ')[0] == 'Monkey':
@@ -31,6 +32,7 @@ for line in data:
         currentMonkey.operation = line[1].lstrip(' ').split(' ')[-2:]
     elif line[0] == 'Test':
         currentMonkey.testDivisibleBy = int(line[1].lstrip(' ').split(' ')[2])
+        globalTest *= currentMonkey.testDivisibleBy
     elif line[0] == 'If true':
         currentMonkey.thowToWhenTrue = int(line[1].lstrip(' ').split(' ')[3])
     elif line[0] == 'If false':
@@ -50,7 +52,7 @@ for line in data:
 
 
 
-for i in range(10000): # <- homme naïf
+for i in range(10000):
     os.system('cls')
     print("Round: " + str(i))
     for monkey in monkeyList:
@@ -71,10 +73,10 @@ for i in range(10000): # <- homme naïf
 
             #Perform monkey action
             if worryLevel % monkey.testDivisibleBy == 0:
-                monkeyList[monkey.thowToWhenTrue].items.append(worryLevel)
+                monkeyList[monkey.thowToWhenTrue].items.append(worryLevel % globalTest)
                 #print("Monkey " + str(monkey.id) + " threw " + str(worryLevel) + " to monkey " + str(monkey.thowToWhenTrue))
             else:
-                monkeyList[monkey.thowToWhenFalse].items.append(worryLevel)
+                monkeyList[monkey.thowToWhenFalse].items.append(worryLevel % globalTest)
                 #print("Monkey " + str(monkey.id) + " threw " + str(worryLevel) + " to monkey " + str(monkey.thowToWhenFalse))
         monkey.items = []
 
