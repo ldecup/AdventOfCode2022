@@ -2,25 +2,26 @@
 Solutions to the puzzles in https://adventofcode.com/2022
 
 Current status:
-Day 1  : **
 
-Day 2  : **
+Day 1 :     **
 
-Day 3  : **
+Day 2 :     **
 
-Day 4  : **
+Day 3 :     **
 
-Day 5  : **
+Day 4 :     **
 
-Day 6  : **
+Day 5 :     **
 
-Day 7  : **
+Day 6 :     **
 
-Day 8  : **
+Day 7 :     **
 
-Day 9  : 
+Day 8 :     **
 
-Day 10 : **
+Day 9 :     
+
+Day 10 :    **
 
 Day 11 : 
 
