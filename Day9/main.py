@@ -1,6 +1,9 @@
 import os
+import copy
 
-inFile = open('Day9/input.txt', 'r')
+#Works with test input, underestimates with real input
+
+inFile = open('Day9/testinput.txt', 'r')
 inData = inFile.readlines()
 inFile.close()
 
@@ -21,15 +24,15 @@ def move(pos, dir):
     elif dir == 'L':
         pos[0] -= 1
     elif dir == 'U':
-        pos[1] += 1
-    elif dir == 'D':
         pos[1] -= 1
+    elif dir == 'D':
+        pos[1] += 1
     return pos
 
 headPos = [0,0]
 tailPos = [0,0]
-listHeadPos = [[headPos[0],headPos[1]]]
-listTailPos = [[tailPos[0],tailPos[1]]]
+listHeadPos = [headPos.copy()]
+listTailPos = [tailPos.copy()]
 biggestX = 0
 biggestY = 0
 for instructions in data:
@@ -37,35 +40,30 @@ for instructions in data:
         headPos = move(headPos,instructions[0])
         tailPos = updateTail(headPos, tailPos, listHeadPos[-1])
         listHeadPos.append(headPos.copy())#why the hidden pointers Python, whyyyy :(
-        listTailPos.append(tailPos.copy())
-        if headPos[0] > biggestX:
-            biggestX = headPos[0]
-        if headPos[1] > biggestY:
-            biggestY = headPos[1]
-
-#Remove duplicates
-sortedList = []
-for positions in listTailPos:
-    if positions not in sortedList:
-        sortedList.append(positions)
+        if tailPos not in listTailPos:
+            listTailPos.append(tailPos.copy())
+        if abs(headPos[0]) > biggestX:
+            biggestX = abs(headPos[0])
+        if abs(headPos[1]) > biggestY:
+            biggestY = abs(headPos[1])
 
 initPosArray = []
-for y in range(biggestY):
+for y in range(2*biggestY+1):
     initPosArray.append([])
-    for x in range(biggestX):
+    for x in range(2*biggestX+1):
         initPosArray[y].append('.')
 
-for i in range(len(listHeadPos)):
+""" for i in range(len(listHeadPos)):
     os.system('cls')
-    posArray = initPosArray.copy()
-    posArray[listTailPos[i][1]][listTailPos[i][0]] = 'T'
-    posArray[listHeadPos[i][1]][listHeadPos[i][0]] = 'H'
+    posArray = copy.deepcopy(initPosArray)
+    posArray[listTailPos[i][1]+biggestY][listTailPos[i][0]+biggestX] = 'T'
+    posArray[listHeadPos[i][1]+biggestY][listHeadPos[i][0]+biggestX] = 'H'
     for lines in posArray:
         line = ''
         for char in lines:
             line += char
         print(line)
-    input('Continue...')
+    input('Continue...') """
 
 #Output
-print('Number of unique positions visited: ' + str(len(sortedList)))
+print('Number of unique positions visited: ' + str(len(listTailPos)))

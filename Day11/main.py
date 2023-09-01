@@ -1,4 +1,4 @@
-inFile = open('DayX/testinput.txt', 'r')
+inFile = open('Day11/testinput.txt', 'r')
 inData = inFile.readlines()
 inFile.close()
 
